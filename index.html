@@ -16,6 +16,23 @@
   --accent:#818cf8;--accent2:#6366f1;--green:#10b981;--red:#ef4444;
   --yellow:#f59e0b;--purple:#c084fc;
   --d1:#6366f1;--d2:#f59e0b;--d3:#10b981;--d4:#ef4444;--d5:#8b5cf6;
+  --ok-bg:rgba(16,185,129,.08);--ok-bdr:rgba(16,185,129,.3);
+  --err-bg:rgba(239,68,68,.08);--err-bdr:rgba(239,68,68,.3);
+  --sel-bg:rgba(99,102,241,.08);--sel-bdr:rgba(99,102,241,.3);
+  --exp-bg:rgba(129,140,248,.08);--exp-bdr:rgba(129,140,248,.3);
+  --bm-bg:rgba(245,158,11,.12);
+}
+[data-theme="light"]{
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#eef0f4;--bg4:#dde1e8;
+  --border:#d1d5db;--text:#1e293b;--text2:#475569;--text3:#64748b;
+  --accent:#6366f1;--accent2:#4f46e5;--green:#059669;--red:#dc2626;
+  --yellow:#d97706;--purple:#9333ea;
+  --d1:#4f46e5;--d2:#d97706;--d3:#059669;--d4:#dc2626;--d5:#7c3aed;
+  --ok-bg:rgba(5,150,105,.1);--ok-bdr:rgba(5,150,105,.35);
+  --err-bg:rgba(220,38,38,.08);--err-bdr:rgba(220,38,38,.3);
+  --sel-bg:rgba(79,70,229,.08);--sel-bdr:rgba(79,70,229,.3);
+  --exp-bg:rgba(99,102,241,.1);--exp-bdr:rgba(99,102,241,.35);
+  --bm-bg:rgba(217,119,6,.12);
 }
 html,body{height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;font-size:15px;line-height:1.5;display:flex;flex-direction:column}
@@ -58,10 +75,11 @@ input,select{font-family:inherit;font-size:inherit}
 .action-btn .sub{font-size:11px;color:var(--text3);margin-top:2px}
 .opt-btn{width:100%;padding:13px 14px;border-radius:8px;background:var(--bg2);border:1px solid var(--border);color:var(--text);text-align:left;font-size:14px;line-height:1.4;display:flex;gap:10px;align-items:flex-start;margin-bottom:7px}
 .opt-btn .letter{font-weight:700;font-family:'JetBrains Mono',monospace;min-width:20px}
-.opt-btn.correct{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);color:var(--green)}
-.opt-btn.wrong{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3);color:var(--red)}
-.opt-btn.selected{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.3)}
+.opt-btn.correct{background:var(--ok-bg);border-color:var(--ok-bdr);color:var(--green)}
+.opt-btn.wrong{background:var(--err-bg);border-color:var(--err-bdr);color:var(--red)}
+.opt-btn.selected{background:var(--sel-bg);border-color:var(--sel-bdr)}
 .opt-btn.dimmed{color:var(--text3)}
+.opt-btn.explored{background:var(--exp-bg);border-color:var(--exp-bdr);color:var(--accent)}
 .explanation{padding:12px 14px;border-radius:8px;background:var(--bg);border:1px solid var(--border);font-size:13px;color:var(--text2);line-height:1.5;margin-top:10px}
 .explanation .heading{font-weight:600;color:var(--purple);font-size:11px;text-transform:uppercase;margin-bottom:4px}
 .result-banner{padding:12px 16px;border-radius:8px;font-weight:600;margin-bottom:10px}
@@ -74,7 +92,7 @@ input,select{font-family:inherit;font-size:inherit}
 .search-input{width:100%;padding:10px 12px;border-radius:8px;background:var(--bg2);color:var(--text);border:1px solid var(--border);margin-bottom:14px}
 .search-input:focus{outline:2px solid var(--accent2);outline-offset:-2px}
 .flash-card{background:var(--bg2);border-radius:12px;padding:24px;border:1px solid var(--border);cursor:pointer;min-height:220px;transition:all .2s}
-.flash-card.flipped{background:var(--bg3);border-color:rgba(16,185,129,.2)}
+.flash-card.flipped{background:var(--bg3);border-color:var(--ok-bdr)}
 .btn-row{display:flex;gap:8px;margin-top:14px;justify-content:center}
 .btn-primary{padding:10px 22px;border-radius:8px;background:var(--accent2);color:#fff;font-weight:600;font-size:14px}
 .btn-secondary{padding:10px 18px;border-radius:8px;background:var(--bg3);color:var(--text2);font-size:14px}
@@ -85,7 +103,7 @@ input,select{font-family:inherit;font-size:inherit}
 .targeted-btn{padding:7px 13px;border-radius:6px;font-size:12px;font-weight:500;border:1px solid var(--border)}
 .review-q{background:var(--bg2);border-radius:10px;padding:16px;margin-bottom:10px;border:1px solid var(--border)}
 .review-q .opt{padding:5px 10px;margin-bottom:3px;border-radius:5px;font-size:13px}
-.review-q .opt.correct{background:rgba(16,185,129,.08);color:var(--green);border:1px solid rgba(16,185,129,.15)}
+.review-q .opt.correct{background:var(--ok-bg);color:var(--green);border:1px solid var(--ok-bdr)}
 .review-q .opt.normal{color:var(--text2);border:1px solid transparent}
 .pager{display:flex;justify-content:center;gap:8px;margin-top:14px;align-items:center}
 .pager button{padding:7px 15px;border-radius:6px;font-size:13px}
@@ -102,7 +120,7 @@ input,select{font-family:inherit;font-size:inherit}
 .top-row .info{font-size:13px;color:var(--text3)}
 .top-row .actions{display:flex;gap:6px}
 .top-row .actions button{padding:4px 10px;border-radius:4px;font-size:12px;background:var(--bg3);color:var(--text3)}
-.top-row .actions button.bookmarked{background:rgba(245,158,11,.12);color:var(--yellow)}
+.top-row .actions button.bookmarked{background:var(--bm-bg);color:var(--yellow)}
 .domain-tag{font-size:11px;font-weight:600;margin-bottom:7px}
 .q-text{font-size:15px;line-height:1.6}
 .cv{font-size:11px;color:var(--text3);margin-top:5px}
@@ -128,12 +146,15 @@ input,select{font-family:inherit;font-size:inherit}
     <h1>CISA Prep</h1>
     <span class="badge">1,511 Qs</span>
   </div>
-  <div id="nav">
+  <div style="display:flex;align-items:center;gap:8px">
+    <button id="theme-toggle" onclick="toggleTheme()" style="padding:4px 8px;border-radius:5px;background:var(--bg3);color:var(--text2);font-size:14px;line-height:1" title="Toggle light/dark mode">&#9788;</button>
+    <div id="nav">
     <button class="active" onclick="go('dashboard')">Dashboard</button>
     <button onclick="go('quiz')">Quiz</button>
     <button onclick="go('exam')">Exam</button>
     <button onclick="go('flash')">Flash</button>
     <button onclick="go('review')">Review</button>
+  </div>
   </div>
 </div>
 
@@ -176,6 +197,33 @@ function resetProgress(){
     localStorage.removeItem(STORE_KEY);
     render();
   }
+}
+
+// Theme
+function loadTheme(){
+  try{
+    const t=localStorage.getItem('cisa_theme');
+    if(t==='light')document.documentElement.setAttribute('data-theme','light');
+    updateThemeIcon();
+  }catch(e){}
+}
+function toggleTheme(){
+  const isLight=document.documentElement.getAttribute('data-theme')==='light';
+  if(isLight){
+    document.documentElement.removeAttribute('data-theme');
+    try{localStorage.setItem('cisa_theme','dark');}catch(e){}
+  }else{
+    document.documentElement.setAttribute('data-theme','light');
+    try{localStorage.setItem('cisa_theme','light');}catch(e){}
+  }
+  updateThemeIcon();
+}
+function updateThemeIcon(){
+  const btn=document.getElementById('theme-toggle');
+  if(!btn)return;
+  const isLight=document.documentElement.getAttribute('data-theme')==='light';
+  btn.innerHTML=isLight?'&#9790;':'&#9788;';
+  btn.title=isLight?'Switch to dark mode':'Switch to light mode';
 }
 
 // Helpers
@@ -241,12 +289,19 @@ function startQuiz(source){
   else if(source==='unanswered')pool=unansweredQs();
   else pool=filtered();
   if(!pool.length){alert("No questions available!");return;}
-  quiz={qs:shuffle(pool),idx:0,sels:{},revs:{},sessionCorrect:0,sessionAnswered:0};
+  quiz={qs:shuffle(pool),idx:0,sels:{},revs:{},explore:{},sessionCorrect:0,sessionAnswered:0};
   mode='quiz';updateNav();render();
 }
 function quizSelect(letter){
-  if(!quiz||quiz.revs[quiz.idx])return;
-  quiz.sels[quiz.idx]=letter;quiz.revs[quiz.idx]=true;
+  if(!quiz)return;
+  // Already answered — explore other options
+  if(quiz.revs[quiz.idx]){
+    quiz.explore[quiz.idx]=letter;
+    render();
+    return;
+  }
+  // First answer — record for progress
+  quiz.sels[quiz.idx]=letter;quiz.revs[quiz.idx]=true;quiz.explore[quiz.idx]=letter;
   const correct=letter===quiz.qs[quiz.idx].c;
   recordAnswer(quiz.qs[quiz.idx].i,correct);
   quiz.sessionAnswered++;
@@ -319,7 +374,7 @@ document.addEventListener('keydown',function(e){
   if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
   const key=e.key.toUpperCase();
   if(mode==='quiz'&&quiz){
-    if(['A','B','C','D','E'].includes(key)&&!quiz.revs[quiz.idx]){
+    if(['A','B','C','D','E'].includes(key)){
       quizSelect(key);e.preventDefault();
     }else if(e.key==='ArrowRight'||e.key==='Enter'){
       if(quiz.revs[quiz.idx])quizNext();e.preventDefault();
@@ -388,19 +443,19 @@ function renderDashboard(){
   </div>`;
 
   h+=`<div class="action-grid">
-    <button class="action-btn" onclick="startQuiz('all')"><div class="icon" style="background:rgba(99,102,241,.12)">&#9654;</div><div><div class="title" style="color:var(--accent2)">Start Quiz</div><div class="sub">Random questions, instant feedback</div></div></button>
-    <button class="action-btn" onclick="go('exam')"><div class="icon" style="background:rgba(245,158,11,.12)">&#9201;</div><div><div class="title" style="color:var(--yellow)">Exam Simulation</div><div class="sub">${examCfg.count} questions, ${examCfg.minutes} min</div></div></button>
-    <button class="action-btn" onclick="startFlash('all')"><div class="icon" style="background:rgba(16,185,129,.12)">&#127183;</div><div><div class="title" style="color:var(--green)">Flashcards</div><div class="sub">Tap to reveal answers</div></div></button>
-    <button class="action-btn" onclick="mode='review';reviewPage=0;reviewSearch='';updateNav();render()"><div class="icon" style="background:rgba(139,92,246,.12)">&#128214;</div><div><div class="title" style="color:var(--purple)">Review All</div><div class="sub">Browse with answers shown</div></div></button>
+    <button class="action-btn" onclick="startQuiz('all')"><div class="icon" style="background:var(--sel-bg)">&#9654;</div><div><div class="title" style="color:var(--accent2)">Start Quiz</div><div class="sub">Random questions, instant feedback</div></div></button>
+    <button class="action-btn" onclick="go('exam')"><div class="icon" style="background:var(--bm-bg)">&#9201;</div><div><div class="title" style="color:var(--yellow)">Exam Simulation</div><div class="sub">${examCfg.count} questions, ${examCfg.minutes} min</div></div></button>
+    <button class="action-btn" onclick="startFlash('all')"><div class="icon" style="background:var(--ok-bg)">&#127183;</div><div><div class="title" style="color:var(--green)">Flashcards</div><div class="sub">Tap to reveal answers</div></div></button>
+    <button class="action-btn" onclick="mode='review';reviewPage=0;reviewSearch='';updateNav();render()"><div class="icon" style="background:var(--exp-bg)">&#128214;</div><div><div class="title" style="color:var(--purple)">Review All</div><div class="sub">Browse with answers shown</div></div></button>
   </div>`;
 
   h+=`<div class="card">
     <div style="font-size:14px;font-weight:600;color:var(--purple);margin-bottom:10px">Targeted Study</div>
     <div class="targeted-row">
-      <button class="targeted-btn" style="background:rgba(99,102,241,.1);color:var(--accent);border-color:rgba(99,102,241,.2)" onclick="startQuiz('unanswered')">Unanswered (${un})</button>
-      <button class="targeted-btn" style="background:rgba(239,68,68,.1);color:var(--red);border-color:rgba(239,68,68,.2)" onclick="startQuiz('weak')">Weak Areas (${wk})</button>
-      <button class="targeted-btn" style="background:rgba(245,158,11,.1);color:var(--yellow);border-color:rgba(245,158,11,.2)" onclick="startQuiz('spaced')">Spaced Repetition (${sp})</button>
-      <button class="targeted-btn" style="background:rgba(139,92,246,.1);color:var(--purple);border-color:rgba(139,92,246,.2)" onclick="startQuiz('bookmarked')">Bookmarked (${bm})</button>
+      <button class="targeted-btn" style="background:var(--sel-bg);color:var(--accent);border-color:var(--sel-bdr)" onclick="startQuiz('unanswered')">Unanswered (${un})</button>
+      <button class="targeted-btn" style="background:var(--err-bg);color:var(--red);border-color:var(--err-bdr)" onclick="startQuiz('weak')">Weak Areas (${wk})</button>
+      <button class="targeted-btn" style="background:var(--bm-bg);color:var(--yellow);border-color:var(--yellow)" onclick="startQuiz('spaced')">Spaced Repetition (${sp})</button>
+      <button class="targeted-btn" style="background:var(--exp-bg);color:var(--purple);border-color:var(--exp-bdr)" onclick="startQuiz('bookmarked')">Bookmarked (${bm})</button>
       <button class="targeted-btn" style="background:var(--bg3);color:var(--text3);margin-left:auto" onclick="resetProgress()">Reset Progress</button>
     </div>
   </div>`;
@@ -420,7 +475,7 @@ function renderDashboard(){
 function renderQuiz(){
   if(!quiz)return'';
   const q=quiz.qs[quiz.idx],bm=progress.bookmarks[q.i];
-  const sel=quiz.sels[quiz.idx],rev=quiz.revs[quiz.idx];
+  const sel=quiz.sels[quiz.idx],rev=quiz.revs[quiz.idx],exp=quiz.explore[quiz.idx];
   let h=`<div class="top-row">
     <span class="info">Question ${quiz.idx+1} of ${quiz.qs.length}</span>
     <div class="actions">
@@ -437,16 +492,20 @@ function renderQuiz(){
     let cls='opt-btn';
     if(rev){
       if(l===q.c)cls+=' correct';
-      else if(l===sel)cls+=' wrong';
+      else if(l===sel&&sel!==q.c)cls+=' wrong';
+      else if(l===exp&&l!==q.c&&l!==sel)cls+=' explored';
       else cls+=' dimmed';
     }else if(l===sel)cls+=' selected';
-    const mark=rev?(l===q.c?' &#10003;':l===sel?' &#10007;':''):'';
+    const mark=rev?(l===q.c?' &#10003;':l===sel&&sel!==q.c?' &#10007;':''):'';
     h+=`<button class="${cls}" onclick="quizSelect('${l}')"><span class="letter">${l}.</span><span>${esc(t)}</span>${mark?`<span style="margin-left:auto">${mark}</span>`:''}</button>`;
   });
 
   if(rev){
     const ok=sel===q.c;
-    h+=`<div class="result-banner" style="background:${ok?'rgba(16,185,129,.1)':'rgba(239,68,68,.1)'};color:${ok?'var(--green)':'var(--red)'};border:1px solid ${ok?'rgba(16,185,129,.2)':'rgba(239,68,68,.2)'}">${ok?'Correct!':'Incorrect &mdash; Answer: '+q.c}</div>`;
+    h+=`<div class="result-banner" style="background:${ok?'var(--ok-bg)':'var(--err-bg)'};color:${ok?'var(--green)':'var(--red)'};border:1px solid ${ok?'var(--ok-bdr)':'var(--err-bdr)'}">${ok?'Correct!':'Incorrect &mdash; Answer: '+q.c}</div>`;
+    if(exp&&exp!==q.c&&exp!==sel){
+      h+=`<div class="explanation" style="border-color:var(--exp-bdr)"><div class="heading" style="color:var(--accent)">Option ${exp}</div><strong>${exp}.</strong> ${esc(q.o[exp])}</div>`;
+    }
     if(q.e){h+=`<div class="explanation"><div class="heading">Explanation</div>${esc(q.e)}</div>`;}
     else{h+=`<div class="explanation"><div class="heading">Correct Answer</div><strong>${q.c}.</strong> ${esc(q.o[q.c])}</div>`;}
     if(q.v)h+=`<div class="cv">Community vote: ${q.v}</div>`;
@@ -454,7 +513,7 @@ function renderQuiz(){
     if(quiz.idx>0)h+=`<button class="btn-secondary" onclick="quizPrev()">&larr; Previous</button>`;
     h+=`<button class="btn-primary" style="flex:1" onclick="quizNext()">${quiz.idx<quiz.qs.length-1?'Next Question &rarr;':'Finish'}</button>`;
     h+=`</div>`;
-    h+=`<div class="kbd-hint">Keyboard: A-D to answer &middot; &larr;&rarr; to navigate &middot; Enter for next</div>`;
+    h+=`<div class="kbd-hint">Keyboard: A-D to explore options &middot; &larr;&rarr; to navigate &middot; Enter for next</div>`;
   }else{
     h+=`<div class="kbd-hint">Keyboard: press A, B, C, or D to answer</div>`;
   }
@@ -538,7 +597,7 @@ function renderExam(){
   });
   h+=`<div class="btn-row">
     <button class="btn-secondary" onclick="examGo(Math.max(0,exam.idx-1))" ${exam.idx===0?'disabled':''}>&#8592; Prev</button>
-    <button class="${progress.bookmarks[q.i]?'btn-secondary bookmarked':'btn-secondary'}" style="${progress.bookmarks[q.i]?'background:rgba(245,158,11,.12);color:var(--yellow)':''}" onclick="toggleBookmark(${q.i});render()">&#9733;</button>
+    <button class="${progress.bookmarks[q.i]?'btn-secondary bookmarked':'btn-secondary'}" style="${progress.bookmarks[q.i]?'background:var(--bm-bg);color:var(--yellow)':''}" onclick="toggleBookmark(${q.i});render()">&#9733;</button>
     <button class="btn-primary" onclick="examGo(Math.min(exam.qs.length-1,exam.idx+1))" ${exam.idx===exam.qs.length-1?'disabled':''}>Next &#8594;</button>
   </div>`;
   h+=`<div class="kbd-hint">Keyboard: A-D to answer &middot; &larr;&rarr; to navigate</div>`;
@@ -560,7 +619,7 @@ function renderFlash(){
   }else{
     Object.entries(q.o).forEach(([l,t])=>{
       const ok=l===q.c;
-      h+=`<div style="padding:7px 11px;margin-bottom:5px;border-radius:6px;font-size:14px;background:${ok?'rgba(16,185,129,.1)':'var(--bg)'};border:1px solid ${ok?'rgba(16,185,129,.25)':'var(--border)'};color:${ok?'var(--green)':'var(--text2)'}"><strong>${l}.</strong> ${esc(t)}${ok?' &#10003;':''}</div>`;
+      h+=`<div style="padding:7px 11px;margin-bottom:5px;border-radius:6px;font-size:14px;background:${ok?'var(--ok-bg)':'var(--bg)'};border:1px solid ${ok?'var(--ok-bdr)':'var(--border)'};color:${ok?'var(--green)':'var(--text2)'}"><strong>${l}.</strong> ${esc(t)}${ok?' &#10003;':''}</div>`;
     });
     if(q.e)h+=`<div class="explanation" style="margin-top:10px">${esc(q.e)}</div>`;
     else h+=`<div class="explanation" style="margin-top:10px"><div class="heading">Correct Answer</div><strong>${q.c}.</strong> ${esc(q.o[q.c])}</div>`;
@@ -569,7 +628,7 @@ function renderFlash(){
   h+=`</div>`;
   h+=`<div class="btn-row">
     <button class="btn-secondary" onclick="if(flash.idx>0){flash.idx--;flash.flip=false;render()}" ${flash.idx===0?'disabled':''}>&larr; Prev</button>
-    <button class="${progress.bookmarks[q.i]?'btn-secondary bookmarked':'btn-secondary'}" style="${progress.bookmarks[q.i]?'background:rgba(245,158,11,.12);color:var(--yellow)':''}" onclick="toggleBookmark(${q.i});render()">&#9733;</button>
+    <button class="${progress.bookmarks[q.i]?'btn-secondary bookmarked':'btn-secondary'}" style="${progress.bookmarks[q.i]?'background:var(--bm-bg);color:var(--yellow)':''}" onclick="toggleBookmark(${q.i});render()">&#9733;</button>
     <button class="btn-primary" onclick="if(flash.idx<flash.qs.length-1){flash.idx++;flash.flip=false;render()}else go('dashboard')">Next &rarr;</button>
   </div>`;
   h+=`<div class="kbd-hint">Keyboard: Space to flip &middot; &larr;&rarr; to navigate</div>`;
@@ -633,6 +692,7 @@ function renderReviewOnly(){
 }
 
 // Init
+loadTheme();
 loadProgress();
 render();
 </script>
